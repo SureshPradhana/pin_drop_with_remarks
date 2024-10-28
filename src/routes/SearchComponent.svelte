@@ -1,0 +1,43 @@
+<script>
+	let areaSearch = '';
+	import { coordinates } from '$lib/stores/store';
+	import { Button } from '$lib/components/ui/button';
+	import { Input } from '$lib/components/ui/input';
+	import { selectedItemStore } from '$lib/stores/store'; 
+
+	async function searchArea() {
+		const response = await fetch(
+			`https://api.maptiler.com/geocoding/${encodeURIComponent(areaSearch)}.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL`
+		);
+		const data = await response.json();
+		let place_name = data.features.length > 0 ? data.features[0].place_name : 'Unknown location';
+		if (data.features && data.features.length > 0) {
+			const { center } = data.features[0]; 
+			const [lng, lat] = center;
+
+			coordinates.set({ lat, lng });
+			const selectedItem = {
+				lat,
+				lng,
+				address: place_name,
+				remarks: '',
+				typ: 'search'
+			};
+
+			selectedItemStore.set(selectedItem);
+		} else {
+			alert('Location not found. Please try a different search.');
+		}
+	}
+</script>
+
+<div>
+	<form class="flex w-full max-w-sm items-center space-x-2">
+		<Input type="text" bind:value={areaSearch} placeholder="Emter Area/Location" />
+		<Button type="submit" on:click={searchArea}>Search</Button>
+	</form>
+</div>
+
+<style>
+	
+</style>
