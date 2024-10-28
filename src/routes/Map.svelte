@@ -11,13 +11,13 @@
 	let marker;
 	let drawerOpen = false;
 	let remarks = '';
+	export let data;
 	$: ({ lat: latt, lng: lngg } = $coordinates);
-
 	onMount(async () => {
 		map = new maplibregl.Map({
 			container: 'map',
 			style:
-				'https://api.maptiler.com/maps/streets/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL',
+				'https://api.maptiler.com/maps/streets/style.json?key='+data.PUBLIC_MAPLIBRE_API,
 			center: [lngg, latt],
 			zoom: 8
 		});
@@ -37,7 +37,8 @@
 				drawerOpen = true; 
 			}, 1000);
 		});
-	});
+	})
+	
 
 	$: if (map) {
 		map.setCenter([lngg, latt]);
@@ -46,7 +47,7 @@
 
 	async function fetchAddress(lat: number, lng: number): Promise<string> {
 		const response = await fetch(
-			`https://api.maptiler.com/geocoding/${lng},${lat}.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL`
+			`https://api.maptiler.com/geocoding/${lng},${lat}.json?key=`+data.PUBLIC_MAPLIBRE_API
 		);
 		const data = await response.json();
 		return data.features.length > 0 ? data.features[0].place_name : 'Unknown location';
@@ -72,7 +73,6 @@
 		drawerOpen = false;
 	}
 </script>
-
 <div class="magical-tracker border border-gray-200 shadow-lg rounded-lg p-4">
 	<div id="map" style="width: 100%;"></div>
 	<Drawer.Root open={drawerOpen} onOpenChange={(open) => (drawerOpen = open)}>
