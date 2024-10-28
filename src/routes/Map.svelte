@@ -72,8 +72,8 @@
 	}
 </script>
 
-<div class="magical-tracker">
-	<div id="map" style="width: 100%; height: 400px;"></div>
+<div class="magical-tracker border border-gray-200 shadow-lg rounded-lg p-4">
+	<div id="map" style="width: 100%;"></div>
 	<Drawer.Root open={drawerOpen} onOpenChange={(open) => (drawerOpen = open)}>
 		<Drawer.Content>
 			<div class="mx-auto w-full max-w-sm">
@@ -116,6 +116,4 @@
 		position: relative;
 		z-index: 1;
 	}
-
-	
 </style>

@@ -7,33 +7,27 @@
 
 	let isLoading = true;
 
-	// Example data format
-	// data = [
-	//     { lat: 12.9715987, lng: 77.594566, address: "Bangalore, India", remarks: "City center" },
-	//     ...
-	// ];
-
-	// Simulate loading data
-	// After loading, you could fetch data here
-	setTimeout(() => (isLoading = false), 2000); // Adjust time as needed
+	setTimeout(() => (isLoading = false), 2000); 
 
 	function selectItem(item) {
-		// Emit the selected item to the parent component
 		dispatch('select', item);
 	}
 </script>
-
 <div>
 	{#if isLoading}
-		<!-- Display Skeletons while loading -->
 		{#each Array(5) as _}
-			<Skeleton height="2rem" class="my-2" />
-			<Separator />
+			<div class="flex items-center space-x-4">
+				<Skeleton class="h-12 w-12 rounded-full" />
+				<div class="space-y-2">
+				  <Skeleton class="h-4 w-[250px]" />
+				  <Skeleton class="h-4 w-[200px]" />
+				</div>
+			  </div>
 		{/each}
 	{:else}
 		<!-- Display Data when loaded -->
 		{#each $listData as item, index}
-			<button on:click={() => selectItem(item)} class="cursor-pointer p-2">
+			<button on:click={() => selectItem(item)} class="cursor-pointer p-2 text-left">
 				<p><strong>Latitude:</strong> {item.lat}</p>
 				<p><strong>Longitude:</strong> {item.lng}</p>
 				<p><strong>Address:</strong> {item.address}</p>

@@ -33,7 +33,7 @@
 
 <div>
 	<form class="flex w-full max-w-sm items-center space-x-2">
-		<Input type="text" bind:value={areaSearch} placeholder="Emter Area/Location" />
+		<Input type="text" bind:value={areaSearch} placeholder="Enter Area/Location" />
 		<Button type="submit" on:click={searchArea}>Search</Button>
 	</form>
 </div>
