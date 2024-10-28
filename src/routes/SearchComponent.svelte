@@ -5,10 +5,12 @@
 	import { Input } from '$lib/components/ui/input';
 	import { selectedItemStore } from '$lib/stores/store'; 
 	export let data;
+	let apikey =data.PUBLIC_MAPLIBRE_API
 
-	async function searchArea() {
+	async function searchArea(event) {
+		event.preventDefault();
 		const response = await fetch(
-			`https://api.maptiler.com/geocoding/${encodeURIComponent(areaSearch)}.json?key=`+data.PUBLIC_MAPLIBRE_API
+			`https://api.maptiler.com/geocoding/${encodeURIComponent(areaSearch)}.json?key=`+apikey
 		);
 		const data = await response.json();
 		let place_name = data.features.length > 0 ? data.features[0].place_name : 'Unknown location';

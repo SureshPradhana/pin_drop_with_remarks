@@ -6,7 +6,7 @@ interface Coordinates {
 	lng: number | null;
 }
 
-export const coordinates = writable<Coordinates>({ lat: 0, lng: 0 });
+export const coordinates = writable<Coordinates>({ lat:40.7127281077059 , lng:  -74.00601547211409 });
 export const selectedItemStore = writable(null);
 
 // Check if listData exists in localStorage and parse it safely

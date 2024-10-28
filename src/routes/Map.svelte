@@ -83,6 +83,7 @@
 				</Drawer.Header>
 				<div class="p-4 pb-0">
 					<textarea
+					    class="p-3"
 						placeholder="Optional remarks..."
 						bind:value={remarks}
 						rows="4"
