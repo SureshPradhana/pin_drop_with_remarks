@@ -27,7 +27,7 @@
 <div class="flex flex-col md:flex-row">
 	<Map {data} />
 	<div class="p-4 border border-gray-200 shadow-lg rounded-lg">
-		<SearchComponent />
+		<SearchComponent {data} />
 		<CurrentInfo />
 		<List on:select={handleSelect} />
 	</div>
