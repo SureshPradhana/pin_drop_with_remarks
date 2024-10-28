@@ -4,7 +4,7 @@
 
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { coordinates } from '$lib/stores/store';
+	import { coordinates,listData } from '$lib/stores/store';
 	import { Button } from '$lib/components/ui/button';
 	import * as Drawer from '$lib/components/ui/drawer/index.js';
 	let map;
@@ -66,6 +66,7 @@
 
 		existingData.push(data);
 		localStorage.setItem('listData', JSON.stringify(existingData));
+		listData.set(existingData);
 
 		console.log('Submitted data:', data);
 		drawerOpen = false;

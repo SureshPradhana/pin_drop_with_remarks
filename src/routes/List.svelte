@@ -13,7 +13,7 @@
 		dispatch('select', item);
 	}
 </script>
-<div>
+<div class="border border-spacing-2">
 	{#if isLoading}
 		{#each Array(5) as _}
 			<div class="flex items-center space-x-4">
@@ -26,6 +26,8 @@
 		{/each}
 	{:else}
 		<!-- Display Data when loaded -->
+		 <h2 class="font-bold">Pin Remarks list</h2>
+		 <Separator/>
 		{#each $listData as item, index}
 			<button on:click={() => selectItem(item)} class="cursor-pointer p-2 text-left">
 				<p><strong>Latitude:</strong> {item.lat}</p>
