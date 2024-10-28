@@ -12,12 +12,13 @@
 	let drawerOpen = false;
 	let remarks = '';
 	export let data;
+	let apikey = data.PUBLIC_MAPLIBRE_API
 	$: ({ lat: latt, lng: lngg } = $coordinates);
 	onMount(async () => {
 		map = new maplibregl.Map({
 			container: 'map',
 			style:
-				'https://api.maptiler.com/maps/streets/style.json?key='+data.PUBLIC_MAPLIBRE_API,
+				'https://api.maptiler.com/maps/streets/style.json?key='+apikey,
 			center: [lngg, latt],
 			zoom: 8
 		});
@@ -47,7 +48,7 @@
 
 	async function fetchAddress(lat: number, lng: number): Promise<string> {
 		const response = await fetch(
-			`https://api.maptiler.com/geocoding/${lng},${lat}.json?key=`+data.PUBLIC_MAPLIBRE_API
+			`https://api.maptiler.com/geocoding/${lng},${lat}.json?key=`+apikey
 		);
 		const data = await response.json();
 		return data.features.length > 0 ? data.features[0].place_name : 'Unknown location';
